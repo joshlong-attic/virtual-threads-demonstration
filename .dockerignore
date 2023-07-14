@@ -1,0 +1,16 @@
+# Ignore everything
+*
+
+# Allow files and directories
+!.mvn
+!mvnw
+!src
+!pom.xml
+#!docker-compose.yaml
+
+# Ignore unnecessary files inside allowed directories
+# This should go after the allowed directories
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db
