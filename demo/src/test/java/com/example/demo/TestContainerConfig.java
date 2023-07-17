@@ -10,7 +10,7 @@ public interface TestContainerConfig {
     GenericContainer<?> httpbin = new GenericContainer<>("mccutchen/go-httpbin")
             .withExposedPorts(8080)
             .waitingFor(new HttpWaitStrategy().forPort(8080))
-            .withReuse(false); // optional
+            .withReuse(true); // optional (default is true)
 
     @DynamicPropertySource
     static void containerProperties(DynamicPropertyRegistry registry) {
