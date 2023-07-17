@@ -34,5 +34,5 @@ The responses above should confirm if you are running with platform threads (e.g
 
 Try a number of requests with delays (see options for `hey` to configure load test)
 ```shell
-hey -n 1 -c 1 http://localhost:8080/blocking
+hey -n 300 -c 100 http://localhost:8080/blocking
 ```
