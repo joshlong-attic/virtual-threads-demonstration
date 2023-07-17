@@ -1,9 +1,0 @@
-services:
-  database:
-    image: 'mccutchen/go-httpbin'
-    ports:
-      - target: 8080
-        # Dynamic setting of properties for arbitrary images not yet supported
-        # https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.docker-compose.custom-images
-        published: 8087
-
