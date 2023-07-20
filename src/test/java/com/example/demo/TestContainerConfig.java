@@ -9,15 +9,14 @@ public interface TestContainerConfig {
 
     GenericContainer<?> httpbin = new GenericContainer<>("mccutchen/go-httpbin")
             .withExposedPorts(8080)
-            .waitingFor(new HttpWaitStrategy().forPort(8080))
-            .withReuse(true); // optional (default is true)
+            .waitingFor(new HttpWaitStrategy().forPort(8080));
 
     @DynamicPropertySource
     static void containerProperties(DynamicPropertyRegistry registry) {
-        System.setProperty("httpbin.url", "http://"
-                + httpbin.getHost()
-                + ":"
-                + httpbin.getFirstMappedPort().toString());
+        System.setProperty("httpbin.url",
+                "http://" + httpbin.getHost()
+                        + ":"
+                        + httpbin.getFirstMappedPort().toString());
     }
 
 }
