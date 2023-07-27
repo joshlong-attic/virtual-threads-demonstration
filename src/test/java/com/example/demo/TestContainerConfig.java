@@ -14,9 +14,11 @@ public interface TestContainerConfig {
     @DynamicPropertySource
     static void containerProperties(DynamicPropertyRegistry registry) {
         System.setProperty("httpbin.url",
-                "http://" + httpbin.getHost()
-                        + ":"
-                        + httpbin.getFirstMappedPort().toString());
+                "http://" + httpbin.getHost() + ":"
+                          + httpbin.getFirstMappedPort().toString());
     }
 
 }
+
+
+

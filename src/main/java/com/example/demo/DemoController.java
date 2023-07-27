@@ -1,17 +1,14 @@
 package com.example.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
 
 @RestController
 public class DemoController {
-
-    Logger logger = LoggerFactory.getLogger(DemoController.class);
 
     @Value("${httpbin.url}")
     private String url;
@@ -22,16 +19,16 @@ public class DemoController {
         restClient = builder.build();
     }
 
-    @GetMapping("/block")
-    public String block() {
+    @GetMapping("/block/{seconds}")
+    public String block(@PathVariable Integer seconds) {
 
         // Make a blocking call (network I/O --> thread-per-request, synchronous operation)
         ResponseEntity<String> result = restClient.get()
-                .uri(url + "/delay/3")
+                .uri(url + "/delay/" + seconds)
                 .retrieve()
                 .toEntity(String.class);
 
-        logger.info("Got {} on thread {}", result.getStatusCode(), Thread.currentThread());
+        System.out.println(result.getStatusCode() + " on " + Thread.currentThread());
 
         return Thread.currentThread() + "\n";
     }
