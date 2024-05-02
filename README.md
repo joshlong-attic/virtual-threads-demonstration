@@ -1,5 +1,12 @@
 # Java Virtual Threads using Spring Boot and Web MVC
 
+
+## Josh's Addendum
+
+99.9% of this is code I stole shamelessly from my amazing colleague [Cora Iberkleid](https://github.com/ciberkleid/springone2023-virtual-threads-demo)
+
+## The Demo So Far... 
+
 This project showcases Spring Boot 3.2 support for Java virtual threads in Web MVC applications.
 This demo uses Tomcat web server, but the same support is available for Jetty as well.
 
