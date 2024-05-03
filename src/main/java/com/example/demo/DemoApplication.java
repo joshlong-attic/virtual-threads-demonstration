@@ -59,7 +59,7 @@ class DemoController {
                 .retrieve()
                 .toEntity(String.class);
 
-        log.info("{} on {}", result.getStatusCode(), Thread.currentThread());
+        log.debug("{} on {}", result.getStatusCode(), Thread.currentThread());
 
         return Map.of("thread", Thread.currentThread() + "");
     }
