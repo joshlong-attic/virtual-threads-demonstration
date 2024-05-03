@@ -32,24 +32,27 @@ class DemoController {
     private final String url;
 
     private final RestClient restClient;
-    private final Environment environment;
 
-    DemoController(Environment environment, @Value("${httpbin.url}") String url, RestClient.Builder builder) {
+
+    private final boolean virtualThreads  ;
+
+    DemoController(Environment environment, @Value("${spring.threads.virtual.enabled:false}") boolean vt, @Value("${httpbin.url}") String url, RestClient.Builder builder) {
         this.restClient = builder.build();
-        this.environment = environment;
+        this.virtualThreads = vt;
         this.url = url;
+        log.info("virtual threads enabled? "  + vt );
     }
 
     @GetMapping("/vt")
-    String threads() {
-        return this.environment.getProperty("spring.threads.virtual.enabled");
+    boolean threads() {
+        return this.virtualThreads ;
     }
 
     @GetMapping("/block/{seconds}")
     Map<String, String> block(@PathVariable Integer seconds) {
         // Make a blocking call (network I/O --> thread-per-request, synchronous operation)
         var resolvedUrl = url + "/delay/" + seconds;
-        log.info("resolved url: {}", resolvedUrl);
+        log.debug("resolved url: {}", resolvedUrl);
         var result = restClient
                 .get()
                 .uri(resolvedUrl)
