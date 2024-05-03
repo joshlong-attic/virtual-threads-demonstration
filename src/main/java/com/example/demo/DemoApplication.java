@@ -33,10 +33,10 @@ class DemoController {
 
     private final RestClient restClient;
 
-
     private final boolean virtualThreads  ;
 
-    DemoController(Environment environment, @Value("${spring.threads.virtual.enabled:false}") boolean vt, @Value("${httpbin.url}") String url, RestClient.Builder builder) {
+    DemoController(Environment environment, @Value("${spring.threads.virtual.enabled:false}") boolean vt,
+                   @Value("${httpbin.url}") String url, RestClient.Builder builder) {
         this.restClient = builder.build();
         this.virtualThreads = vt;
         this.url = url;
