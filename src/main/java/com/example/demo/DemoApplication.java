@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
 
 import java.util.Map;
@@ -32,10 +32,17 @@ class DemoController {
     private final String url;
 
     private final RestClient restClient;
+    private final Environment environment;
 
-    DemoController (@Value("${httpbin.url}") String url, RestClient.Builder builder) {
+    DemoController(Environment environment, @Value("${httpbin.url}") String url, RestClient.Builder builder) {
         this.restClient = builder.build();
+        this.environment = environment;
         this.url = url;
+    }
+
+    @GetMapping("/vt")
+    String threads() {
+        return this.environment.getProperty("spring.threads.virtual.enabled");
     }
 
     @GetMapping("/block/{seconds}")
